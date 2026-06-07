@@ -226,3 +226,33 @@ export interface ResumenFinanciero {
   resultado: number
   cantidad_servicios: number
 }
+
+// ── EMPLEADOS ────────────────────────────────────────────────────────────────
+export type RolEmpleado = 'ASESOR' | 'CHOFER' | 'VELADOR' | 'ADMINISTRATIVO' | 'GERENCIA' | 'OTRO'
+export type EstadoEmpleado = 'ACTIVO' | 'INACTIVO' | 'LICENCIA'
+
+export interface Empleado {
+  id: string
+  created_at?: string
+  // Datos personales
+  nombre: string
+  apellido: string
+  documento: string
+  fecha_nacimiento?: string
+  nacionalidad: string
+  estado_civil?: string
+  domicilio?: string
+  localidad?: string
+  // Contacto
+  telefono?: string
+  celular?: string
+  email?: string
+  contacto_emergencia_nombre?: string
+  contacto_emergencia_tel?: string
+  // Laboral
+  rol: RolEmpleado
+  estado: EstadoEmpleado
+  fecha_ingreso?: string
+  legajo?: string
+  notas?: string
+}

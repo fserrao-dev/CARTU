@@ -240,3 +240,27 @@ function nextMonth(mes: string): string {
   const [y, m] = mes.split('-').map(Number)
   return m === 12 ? `${y + 1}-01` : `${y}-${String(m + 1).padStart(2, '0')}`
 }
+
+// ── EMPLEADOS ────────────────────────────────────────────────────────────────
+export async function getEmpleados(): Promise<import('@/types').Empleado[]> {
+  const { data, error } = await supabase
+    .from('empleados').select('*').order('apellido')
+  if (error) throw error
+  return data ?? []
+}
+
+export async function createEmpleado(e: Omit<import('@/types').Empleado, 'id' | 'created_at'>): Promise<import('@/types').Empleado> {
+  const { data, error } = await supabase.from('empleados').insert(e).select().single()
+  if (error) throw error
+  return data
+}
+
+export async function updateEmpleado(id: string, e: Partial<import('@/types').Empleado>): Promise<void> {
+  const { error } = await supabase.from('empleados').update(e).eq('id', id)
+  if (error) throw error
+}
+
+export async function deleteEmpleado(id: string): Promise<void> {
+  const { error } = await supabase.from('empleados').delete().eq('id', id)
+  if (error) throw error
+}
