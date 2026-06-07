@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Carunchio-Péculo · Gestión',
-  description: 'Sistema de gestión de servicios fúnebres',
+  title: 'CARTU · Gestión',
+  description: 'CARTU — Sistema de Gestión',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

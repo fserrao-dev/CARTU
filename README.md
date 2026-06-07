@@ -1,4 +1,4 @@
-# Carunchio-Péculo — Sistema de Gestión
+# CARTU — Sistema de Gestión
 
 App web de gestión de servicios fúnebres. Next.js 14 + Supabase + TypeScript + Tailwind.
 

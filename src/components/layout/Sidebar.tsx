@@ -46,7 +46,7 @@ export default function Sidebar() {
     <>
       {/* Mobile topbar */}
       <div className="md:hidden fixed top-0 left-0 right-0 z-50 bg-brand-900 flex items-center justify-between px-4 py-3 border-b border-white/10">
-        <span className="font-serif text-white text-lg">Carunchio-Péculo</span>
+        <span className="font-serif text-white text-lg">CARTU</span>
         <button onClick={() => setOpen(!open)} className="text-white/70">
           {open ? <X size={20} /> : <Menu size={20} />}
         </button>
@@ -63,8 +63,8 @@ export default function Sidebar() {
       {/* Desktop sidebar */}
       <aside className="hidden md:flex flex-col w-52 bg-brand-900 fixed top-0 left-0 h-screen z-40">
         <div className="px-5 pt-6 pb-4 border-b border-white/10">
-          <h1 className="font-serif text-white text-xl leading-tight">Carunchio<br />Péculo</h1>
-          <p className="text-xs text-white/30 tracking-widest uppercase mt-1">Servicios Fúnebres</p>
+          <h1 className="font-serif text-white text-xl leading-tight">CARTU</h1>
+          <p className="text-xs text-white/30 tracking-widest uppercase mt-1">Sistema de Gestión</p>
         </div>
         {nav}
         <div className="px-5 py-4 border-t border-white/10 text-xs text-white/30">v1.0 · 2026</div>

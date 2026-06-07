@@ -1,5 +1,5 @@
 -- ============================================================
--- CARUNCHIO-PÉCULO — Schema Supabase
+-- CARTU — Schema Supabase
 -- Ejecutar en: Supabase Dashboard → SQL Editor
 -- ============================================================
 
