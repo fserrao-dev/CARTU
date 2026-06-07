@@ -1,74 +1,44 @@
-# CARTU — Sistema de Gestión
+# CARTU v2 — Sistema de Gestión de Servicios Fúnebres
 
-App web de gestión de servicios fúnebres. Next.js 14 + Supabase + TypeScript + Tailwind.
+## Setup
 
----
-
-## Setup en 5 pasos
-
-### 1. Instalá dependencias
+### 1. Instalar dependencias
 ```bash
 npm install
 ```
 
-### 2. Creá el proyecto en Supabase
-- Entrá a https://supabase.com y creá un proyecto nuevo
-- Anotá la **URL** y la **anon key** (Settings → API)
-
-### 3. Creá las tablas
-- En tu proyecto Supabase: **SQL Editor** → pegá el contenido de `supabase-schema.sql` → Run
-
-### 4. Configurá las variables de entorno
+### 2. Variables de entorno
 ```bash
 cp .env.local.example .env.local
 ```
-Editá `.env.local` con tu URL y anon key de Supabase.
+El archivo ya tiene las credenciales del proyecto Supabase configurado.
 
-### 5. Levantá el servidor
+### 3. Crear tablas en Supabase
+- Supabase Dashboard → SQL Editor → pegar contenido de `supabase-schema.sql` → Run
+
+### 4. Crear usuario admin
+- Supabase Dashboard → Authentication → Users → Add user
+- Email: el que quieras usar
+- Password: elegís vos
+
+### 5. Correr local
 ```bash
 npm run dev
 ```
-Abrí http://localhost:3000
-
----
 
 ## Deploy en Vercel
 ```bash
-# Instalar Vercel CLI si no lo tenés
-npm i -g vercel
-
-vercel
-# Te va a pedir las env vars: NEXT_PUBLIC_SUPABASE_URL y NEXT_PUBLIC_SUPABASE_ANON_KEY
+git add .
+git commit -m "feat: cartu v2 completo"
+git push
 ```
+Vercel detecta el push y redeploya automáticamente.
 
----
-
-## Estructura del proyecto
-```
-src/
-  app/
-    dashboard/       → Inicio con métricas y alertas
-    servicios/       → Lista de servicios + nuevo + detalle
-    stock/           → Gestión de inventario
-  components/
-    layout/          → Sidebar, AppLayout
-    servicios/       → Form, Lista, Detalle
-    stock/           → StockManager
-    ui/              → Badge, StatCard, Modal, Field, Toast
-  lib/
-    supabase.ts      → Cliente Supabase
-    db.ts            → Funciones CRUD
-    utils.ts         → Formatters
-  types/
-    index.ts         → Tipos TypeScript
-```
-
----
-
-## Próximas mejoras sugeridas
-- [ ] Autenticación (Supabase Auth) con login por email
-- [ ] Multiusuario con RLS por usuario
-- [ ] Exportar orden de trabajo a PDF
-- [ ] Historial de pagos / cobros parciales
-- [ ] Notificaciones de stock bajo por email/WhatsApp
-- [ ] Estadísticas mensuales y anuales
+## Módulos incluidos
+- **Dashboard** — métricas, cobros pendientes, alertas de stock
+- **Servicios** — CRUD completo, estados, historial de pagos, edición, filtros, exportar Excel
+- **Agenda** — calendario mensual, gestión de salas y vehículos
+- **Stock** — ataúdes, urnas, mortajas con historial de movimientos y proveedores
+- **Contactos** — responsables, obras sociales, crematorios, cementerios, proveedores
+- **Reportes** — facturación mensual, rendimiento por asesor, gráficos, exportar Excel
+- **Login** — autenticación con Supabase Auth

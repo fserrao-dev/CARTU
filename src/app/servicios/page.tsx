@@ -9,13 +9,11 @@ export const revalidate = 0
 export default async function ServiciosPage() {
   const servicios = await getServicios()
   return (
-    <AppLayout title="Servicios">
-      <div className="flex items-center justify-between mb-5">
-        <p className="text-sm text-brand-500">{servicios.length} servicio{servicios.length !== 1 ? 's' : ''} registrado{servicios.length !== 1 ? 's' : ''}</p>
-        <Link href="/servicios/nuevo" className="btn btn-primary">
-          <Plus size={16} /> Nuevo servicio
-        </Link>
-      </div>
+    <AppLayout title="Servicios" actions={
+      <Link href="/servicios/nuevo" className="btn btn-primary btn-sm">
+        <Plus size={14} /> Nuevo
+      </Link>
+    }>
       <ServiciosList servicios={servicios} />
     </AppLayout>
   )

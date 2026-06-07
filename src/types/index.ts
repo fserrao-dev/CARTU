@@ -4,6 +4,9 @@ export type TipoVelatorio = 'DESPEDIDA 5 HORAS' | 'VELATORIO 12 HORAS' | 'VELATO
 export type EstadoCivil = 'SOLTERO/A' | 'CASADO/A' | 'VIUDO/A' | 'DIVORCIADO/A'
 export type Parentesco = 'HIJO/A' | 'CÓNYUGE' | 'HERMANO/A' | 'PADRE/MADRE' | 'NIETO/A' | 'OTRO'
 export type CategoriaStock = 'Ataúd' | 'Urna' | 'Mortaja'
+export type EstadoServicio = 'PENDIENTE' | 'EN CURSO' | 'COMPLETADO' | 'CANCELADO'
+export type MedioPago = 'EFECTIVO' | 'TRANSFERENCIA' | 'TARJETA DÉBITO' | 'TARJETA CRÉDITO' | 'CHEQUE'
+export type UserRole = 'admin' | 'asesor'
 
 export interface Servicio {
   id: string
@@ -13,7 +16,8 @@ export interface Servicio {
   fecha_servicio: string
   asesor: string
   cobertura: Cobertura
-  // Cobertura (obra social)
+  estado: EstadoServicio
+  // Cobertura OS
   titular?: string
   codigo_cobertura?: string
   legajo?: string
@@ -82,6 +86,16 @@ export interface Servicio {
   log_observaciones?: string
 }
 
+export interface PagoServicio {
+  id: string
+  created_at?: string
+  servicio_id: string
+  fecha: string
+  monto: number
+  medio: MedioPago
+  nota?: string
+}
+
 export interface StockItem {
   id: string
   created_at?: string
@@ -90,4 +104,125 @@ export interface StockItem {
   codigo: string
   cantidad: number
   minimo: number
+  proveedor?: string
+  precio_unitario?: number
+}
+
+export interface MovimientoStock {
+  id: string
+  created_at?: string
+  stock_id: string
+  tipo: 'ENTRADA' | 'SALIDA' | 'AJUSTE'
+  cantidad: number
+  motivo?: string
+  servicio_id?: string
+  usuario?: string
+}
+
+export interface Sala {
+  id: string
+  nombre: string
+  capacidad?: number
+  activa: boolean
+}
+
+export interface Vehiculo {
+  id: string
+  nombre: string
+  patente?: string
+  tipo: 'AMBULANCIA' | 'FÚNEBRE' | 'OTRO'
+  activo: boolean
+}
+
+export interface Contacto {
+  id: string
+  created_at?: string
+  tipo: 'RESPONSABLE' | 'OBRA_SOCIAL' | 'CREMATORIO' | 'CEMENTERIO' | 'PROVEEDOR'
+  nombre: string
+  apellido?: string
+  razon_social?: string
+  telefono?: string
+  celular?: string
+  email?: string
+  direccion?: string
+  localidad?: string
+  notas?: string
+  codigo_os?: string
+}
+
+export interface Profile {
+  id: string
+  email: string
+  nombre: string
+  apellido: string
+  role: UserRole
+  activo: boolean
+}
+
+// ── FINANZAS ─────────────────────────────────────────────────────────────────
+
+export type TipoEgreso = 
+  | 'STOCK'           // Compra de ataúdes, urnas, mortajas
+  | 'CREMATORIO'      // Servicio de crematorio tercerizado
+  | 'COMBUSTIBLE'     // Combustible vehículos
+  | 'MANTENIMIENTO'   // Mantenimiento vehículos/local
+  | 'PERSONAL'        // Sueldos, jornales, honorarios
+  | 'ALQUILER'        // Alquiler sede/salas
+  | 'SERVICIOS'       // Luz, gas, teléfono, internet
+  | 'SEGUROS'         // Seguros vehículos/local
+  | 'SUBCONTRATADO'   // Tanatopraxia, responso, azafata externos
+  | 'IMPUESTOS'       // IIBB, sellos, municipales
+  | 'BANCARIO'        // Comisiones, transferencias
+  | 'OTRO'
+
+export type EstadoCobro = 'PENDIENTE' | 'PRESENTADO' | 'COBRADO' | 'INCOBRABLE'
+
+export interface Egreso {
+  id: string
+  created_at?: string
+  fecha: string
+  tipo: TipoEgreso
+  descripcion: string
+  proveedor?: string
+  monto: number
+  comprobante?: string
+  servicio_id?: string  // Si está asociado a un servicio
+  stock_id?: string     // Si es compra de stock
+  notas?: string
+}
+
+export interface CobranzaOS {
+  id: string
+  created_at?: string
+  servicio_id: string
+  obra_social: string
+  codigo_prestacion?: string
+  arancel: number           // Lo que paga la OS
+  monto_presentado: number  // Lo que se presentó
+  fecha_presentacion?: string
+  fecha_cobro_estimada?: string
+  fecha_cobro_real?: string
+  estado: EstadoCobro
+  diferencia?: number       // arancel - costo real (margen OS)
+  notas?: string
+}
+
+export interface GastoFijo {
+  id: string
+  nombre: string
+  tipo: TipoEgreso
+  monto_mensual: number
+  activo: boolean
+  notas?: string
+}
+
+export interface ResumenFinanciero {
+  mes: string
+  facturado: number
+  cobrado: number
+  pendiente_familias: number
+  pendiente_os: number
+  egresos: number
+  resultado: number
+  cantidad_servicios: number
 }

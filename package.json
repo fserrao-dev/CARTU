@@ -1,6 +1,6 @@
 {
   "name": "cartu",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -17,7 +17,9 @@
     "react-hook-form": "^7.51.5",
     "date-fns": "^3.6.0",
     "clsx": "^2.1.1",
-    "lucide-react": "^0.383.0"
+    "lucide-react": "^0.383.0",
+    "recharts": "^2.12.7",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "typescript": "^5",

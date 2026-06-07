@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { signIn } from '@/lib/auth'
 import { Eye, EyeOff, Loader2 } from 'lucide-react'
+import Logo from '@/components/layout/Logo'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -29,12 +30,17 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-brand-900 flex items-center justify-center p-4">
       <div className="w-full max-w-sm">
-        <div className="text-center mb-8">
-          <h1 className="font-serif text-4xl text-white mb-1">CARTU</h1>
-          <p className="text-white/40 text-sm tracking-widest uppercase">Sistema de Gestión</p>
+        {/* Logo + nombre */}
+        <div className="flex flex-col items-center mb-8 gap-3">
+          <Logo size={72} />
+          <div className="text-center">
+            <h1 className="font-serif text-3xl text-white leading-tight">Carunchio-Péculo</h1>
+            <p className="text-gold-200/50 text-xs tracking-widest uppercase mt-1">Tradición en Servicios Fúnebres</p>
+          </div>
         </div>
+
         <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-6 shadow-2xl">
-          <h2 className="font-serif text-xl mb-5">Iniciar sesión</h2>
+          <h2 className="font-serif text-xl mb-5 text-brand-900">Acceso al sistema</h2>
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-700 text-sm px-3 py-2 rounded-lg mb-4">
               {error}
@@ -43,29 +49,17 @@ export default function LoginPage() {
           <div className="flex flex-col gap-4">
             <div>
               <label className="label">Email</label>
-              <input
-                type="email" required
-                className="input"
-                placeholder="usuario@cartu.com"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-              />
+              <input type="email" required className="input" placeholder="usuario@carunchio.com.ar"
+                value={email} onChange={e => setEmail(e.target.value)} />
             </div>
             <div>
               <label className="label">Contraseña</label>
               <div className="relative">
-                <input
-                  type={showPass ? 'text' : 'password'} required
-                  className="input pr-10"
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={e => setPassword(e.target.value)}
-                />
-                <button
-                  type="button"
+                <input type={showPass ? 'text' : 'password'} required className="input pr-10"
+                  placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)} />
+                <button type="button"
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-brand-400 hover:text-brand-700"
-                  onClick={() => setShowPass(!showPass)}
-                >
+                  onClick={() => setShowPass(!showPass)}>
                   {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
               </div>
@@ -75,7 +69,7 @@ export default function LoginPage() {
             </button>
           </div>
         </form>
-        <p className="text-center text-white/30 text-xs mt-6">CARTU v2.0 · {new Date().getFullYear()}</p>
+        <p className="text-center text-white/20 text-xs mt-6">Sistema de gestión interno · {new Date().getFullYear()}</p>
       </div>
     </div>
   )

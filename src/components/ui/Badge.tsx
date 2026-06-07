@@ -1,7 +1,7 @@
+// Badge
 import { cn } from '@/lib/utils'
 
 type Variant = 'default' | 'gold' | 'success' | 'danger' | 'info' | 'warn'
-
 const variants: Record<Variant, string> = {
   default: 'bg-brand-100 text-brand-700',
   gold:    'bg-gold-50 text-gold-500',
@@ -11,10 +11,6 @@ const variants: Record<Variant, string> = {
   warn:    'bg-amber-50 text-amber-700',
 }
 
-export default function Badge({ children, variant = 'default' }: { children: React.ReactNode; variant?: Variant }) {
-  return (
-    <span className={cn('badge', variants[variant])}>
-      {children}
-    </span>
-  )
+export function Badge({ children, variant = 'default', className }: { children: React.ReactNode; variant?: Variant; className?: string }) {
+  return <span className={cn('badge', variants[variant], className)}>{children}</span>
 }
