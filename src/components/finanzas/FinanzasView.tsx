@@ -75,7 +75,7 @@ export default function FinanzasView({ servicios, egresos: initEgresos, cobranza
   const COB_DEFAULT = { servicio_id: '', obra_social: '', codigo_prestacion: '', arancel: '', monto_presentado: '', fecha_presentacion: '', fecha_cobro_estimada: '', fecha_cobro_real: '', estado: 'PENDIENTE' as EstadoCobro, notas: '' }
   const [cobForm, setCobForm] = useState(COB_DEFAULT)
 
-  const GF_DEFAULT = { nombre: '', tipo: 'ALQUILER' as TipoEgreso, monto_mensual: '', activo: true, notas: '' }
+  const GF_DEFAULT = { nombre: '', tipo: 'ALQUILER' as TipoEgreso, monto_mensual: '' as string, activo: true, notas: '' }
   const [gfForm, setGfForm] = useState<typeof GF_DEFAULT & { activo: boolean }>(GF_DEFAULT)
 
   // ── Cálculos globales ──────────────────────────────────────────────────────
@@ -756,7 +756,7 @@ export default function FinanzasView({ servicios, egresos: initEgresos, cobranza
               {TIPOS_EGRESO.map(t => <option key={t}>{t}</option>)}
             </select>
           </Field>
-          <Field label="Monto mensual"><input type="number" className="input" value={gfForm.monto_mensual} onChange={e => setGfForm(p => ({ ...p, monto_mensual: e.target.value as unknown as number }))} placeholder="0" /></Field>
+          <Field label="Monto mensual"><input type="number" className="input" value={gfForm.monto_mensual} onChange={e => setGfForm(p => ({ ...p, monto_mensual: e.target.value }))} placeholder="0" /></Field>
           <label className="flex items-center gap-2 text-sm cursor-pointer">
             <input type="checkbox" checked={gfForm.activo} onChange={e => setGfForm(p => ({ ...p, activo: e.target.checked }))} className="accent-brand-900 w-4 h-4" />
             Activo (se incluye en el cálculo mensual)
