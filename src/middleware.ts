@@ -11,14 +11,14 @@ export async function middleware(request: NextRequest) {
       cookies: {
         get(name: string) { return request.cookies.get(name)?.value },
         set(name: string, value: string, options: Record<string, unknown>) {
-          request.cookies.set({ name, value, ...options as never })
+          request.cookies.set(name, value)
           response = NextResponse.next({ request: { headers: request.headers } })
-          response.cookies.set({ name, value, ...options as never })
+          response.cookies.set(name, value)
         },
         remove(name: string, options: Record<string, unknown>) {
-          request.cookies.set({ name, value: '', ...options as never })
+          request.cookies.set(name, '')
           response = NextResponse.next({ request: { headers: request.headers } })
-          response.cookies.set({ name, value: '', ...options as never })
+          response.cookies.set(name, '')
         },
       },
     }
@@ -27,10 +27,7 @@ export async function middleware(request: NextRequest) {
   const { data: { session } } = await supabase.auth.getSession()
   const { pathname } = request.nextUrl
 
-  // Rutas públicas
   if (pathname.startsWith('/auth')) return response
-
-  // Redirigir a login si no hay sesión
   if (!session) {
     return NextResponse.redirect(new URL('/auth/login', request.url))
   }
