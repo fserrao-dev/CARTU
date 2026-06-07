@@ -17,7 +17,7 @@ export default function ServiciosList({ servicios }: { servicios: Servicio[] }) 
   const [asesor, setAsesor] = useState('')
   const [page, setPage] = useState(1)
 
-  const asesores = useMemo(() => [...new Set(servicios.map(s => s.asesor).filter(Boolean))], [servicios])
+  const asesores = useMemo(() => Array.from(new Set(servicios.map(s => s.asesor).filter(Boolean))), [servicios])
 
   const filtered = useMemo(() => servicios.filter(s => {
     const matchQ = !q || `${s.ext_apellido} ${s.ext_nombre} ${s.nro_orden} ${s.resp_apellido} ${s.asesor}`.toLowerCase().includes(q.toLowerCase())
