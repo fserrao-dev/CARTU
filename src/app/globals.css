@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-brand-50 text-brand-900 font-sans antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-serif;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center gap-2 px-4 py-2 text-sm border border-brand-200 rounded-lg bg-white text-brand-900 transition-all hover:bg-brand-50 hover:border-brand-200 active:scale-95 cursor-pointer;
+  }
+  .btn-primary {
+    @apply bg-brand-900 text-white border-brand-900 hover:bg-brand-700 hover:border-brand-700;
+  }
+  .btn-gold {
+    @apply bg-gold-50 text-gold-500 border-gold-200 hover:bg-gold-50;
+  }
+  .btn-danger {
+    @apply bg-red-50 text-red-700 border-red-200 hover:bg-red-100;
+  }
+  .btn-sm {
+    @apply px-3 py-1.5 text-xs;
+  }
+  .card {
+    @apply bg-white border border-brand-100 rounded-xl p-5 shadow-sm;
+  }
+  .input {
+    @apply w-full px-3 py-2 text-sm border border-brand-200 rounded-lg bg-white text-brand-900 placeholder:text-brand-200 focus:outline-none focus:border-brand-500 transition-colors;
+  }
+  .label {
+    @apply block text-xs font-medium text-brand-500 mb-1 tracking-wide;
+  }
+  .badge {
+    @apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium;
+  }
+  .section-title {
+    @apply text-xs font-medium text-brand-500 uppercase tracking-widest mb-3 pb-2 border-b border-brand-100 flex items-center gap-2;
+  }
+}
+
+@media print {
+  .no-print { display: none !important; }
+  .print-only { display: block !important; }
+  body { background: white; }
+}
