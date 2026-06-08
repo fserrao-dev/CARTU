@@ -4,32 +4,84 @@
 @tailwind utilities;
 
 @layer base {
-  body { @apply bg-brand-50 text-brand-900 font-sans antialiased; }
-  h1, h2, h3, h4 { @apply font-serif; }
+  :root {
+    --bg: #F5F3EE;
+    --surface: #FFFFFF;
+    --surface2: #F0EDE6;
+    --text: #1A1410;
+    --text2: #6B5E4A;
+    --text3: #9E9280;
+    --border: #DDD9D2;
+    --border2: #C8C3BB;
+  }
+  .dark {
+    --bg: #141210;
+    --surface: #1E1B18;
+    --surface2: #252220;
+    --text: #F0EDE6;
+    --text2: #A09080;
+    --text3: #6B5E4A;
+    --border: #2E2B28;
+    --border2: #3D3830;
+  }
+  body {
+    @apply font-sans antialiased;
+    background-color: var(--bg);
+    color: var(--text);
+  }
+  h1,h2,h3,h4 { @apply font-serif; }
 }
 
 @layer components {
-  .btn { @apply inline-flex items-center gap-2 px-4 py-2 text-sm border border-brand-200 rounded-lg bg-white text-brand-900 transition-all hover:bg-brand-50 hover:border-brand-200 active:scale-[0.98] cursor-pointer font-sans; }
+  .btn {
+    @apply inline-flex items-center gap-2 px-4 py-2 text-sm border rounded-lg transition-all active:scale-[0.98] cursor-pointer font-sans;
+    background: var(--surface);
+    color: var(--text);
+    border-color: var(--border);
+  }
+  .btn:hover { background: var(--surface2); border-color: var(--border2); }
   .btn-primary { @apply bg-brand-900 text-white border-brand-900 hover:bg-brand-700 hover:border-brand-700; }
   .btn-gold { @apply bg-gold-50 text-gold-500 border-gold-200 hover:bg-gold-50; }
   .btn-danger { @apply bg-red-50 text-red-700 border-red-200 hover:bg-red-100; }
   .btn-sm { @apply px-3 py-1.5 text-xs; }
   .btn-xs { @apply px-2 py-1 text-xs; }
-  .card { @apply bg-white border border-brand-100 rounded-xl p-5 shadow-sm; }
-  .input { @apply w-full px-3 py-2 text-sm border border-brand-200 rounded-lg bg-white text-brand-900 placeholder:text-brand-400 focus:outline-none focus:border-brand-500 transition-colors font-sans; }
-  .label { @apply block text-xs font-medium text-brand-500 mb-1 tracking-wide uppercase; }
+
+  .card {
+    @apply rounded-xl p-5 shadow-sm;
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+
+  .input {
+    @apply w-full px-3 py-2 text-sm rounded-lg transition-colors font-sans;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .input::placeholder { color: var(--text3); }
+  .input:focus { outline: none; border-color: var(--border2); }
+
+  .label { @apply block text-xs font-medium mb-1 tracking-wide uppercase; color: var(--text3); }
   .badge { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium; }
-  .section-title { @apply text-xs font-medium text-brand-400 uppercase tracking-widest mb-3 pb-2 border-b border-brand-100 flex items-center gap-2; }
+  .section-title { @apply text-xs font-medium uppercase tracking-widest mb-3 pb-2 flex items-center gap-2; color: var(--text3); border-bottom: 1px solid var(--border); }
   .page-title { @apply font-serif text-2xl font-medium; }
-  .divider { @apply border-t border-brand-100 my-4; }
-  .table-head { @apply text-xs text-brand-400 uppercase tracking-wider border-b border-brand-100; }
-  .table-row { @apply border-b border-brand-50 hover:bg-brand-50 transition-colors; }
+  .divider { @apply my-4; border-top: 1px solid var(--border); }
+  .table-head { @apply text-xs uppercase tracking-wider; color: var(--text3); border-bottom: 1px solid var(--border); }
+  .table-row { transition: background .15s; border-bottom: 1px solid var(--border); }
+  .table-row:hover { background: var(--surface2); }
   .sidebar-item { @apply flex items-center gap-3 px-5 py-2.5 text-sm transition-all border-l-2; }
 }
 
+/* Dark mode select/option */
+.dark select option { background: #1E1B18; color: #F0EDE6; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { @apply rounded-full; background: var(--border2); }
+
 @media print {
   .no-print { display: none !important; }
-  .print-only { display: block !important; }
-  body { background: white; font-size: 12px; }
-  .card { border: 1px solid #ccc !important; box-shadow: none !important; }
+  body { background: white; font-size: 12px; color: black; }
+  .card { border: 1px solid #ccc !important; box-shadow: none !important; background: white !important; }
 }

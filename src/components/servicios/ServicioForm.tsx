@@ -37,11 +37,12 @@ const DEFAULT: FormData = {
 }
 
 interface Props {
+  asesores?: import('@/types').Empleado[]
   initialData?: Servicio
   mode?: 'create' | 'edit'
 }
 
-export default function ServicioForm({ initialData, mode = 'create' }: Props) {
+export default function ServicioForm({ initialData, mode = 'create', asesores = [] }: Props) {
   const router = useRouter()
   const { toast } = useToast()
   const [form, setForm] = useState<FormData>(initialData ? { ...DEFAULT, ...initialData } : DEFAULT)
@@ -104,7 +105,19 @@ export default function ServicioForm({ initialData, mode = 'create' }: Props) {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
           <Field label="N° Orden"><input {...inp('nro_orden')} placeholder="4446" /></Field>
           <Field label="Fecha"><input type="date" {...inp('fecha_servicio')} /></Field>
-          <Field label="Asesor"><input {...inp('asesor')} placeholder="Yani" /></Field>
+          <Field label="Asesor">
+            {asesores.length > 0 ? (
+              <select {...inp('asesor')}>
+                <option value="">— Seleccioná un asesor —</option>
+                {asesores.map(a => (
+                  <option key={a.id} value={`${a.nombre} ${a.apellido}`}>{a.apellido}, {a.nombre}</option>
+                ))}
+                <option value="__otro">Otro (escribir)</option>
+              </select>
+            ) : (
+              <input {...inp('asesor')} placeholder="Nombre del asesor" />
+            )}
+          </Field>
           <Field label="Cobertura">
             <select {...inp('cobertura')}>
               {['PARTICULAR','OBRA SOCIAL','MUTUAL','PREPAGA'].map(o => <option key={o}>{o}</option>)}

@@ -8,8 +8,9 @@ import { Badge } from '@/components/ui/Badge'
 import { Modal } from '@/components/ui/Modal'
 import { Field } from '@/components/ui/Field'
 import { useToast } from '@/components/ui/ToastProvider'
-import { Printer, Trash2, ArrowLeft, Edit2, CheckCircle, XCircle, Plus, DollarSign } from 'lucide-react'
+import { Trash2, ArrowLeft, Edit2, CheckCircle, XCircle, Plus, DollarSign } from 'lucide-react'
 import Link from 'next/link'
+import PrintOrden from './PrintOrden'
 
 function Row({ label, value }: { label: string; value?: string | number | boolean | null }) {
   if (value === null || value === undefined || value === '') return null
@@ -108,7 +109,7 @@ export default function ServicioDetail({ servicio: s, pagos: initialPagos }: { s
         <Link href="/servicios" className="btn btn-sm"><ArrowLeft size={14} /> Volver</Link>
         <Link href={`/servicios/editar/${s.id}`} className="btn btn-sm btn-gold"><Edit2 size={14} /> Editar</Link>
         <div className="flex-1" />
-        <button className="btn btn-sm" onClick={() => window.print()}><Printer size={14} /> Imprimir</button>
+        <PrintOrden servicio={s} />
         <button className="btn btn-sm btn-danger" onClick={() => setConfirmDelete(true)}><Trash2 size={14} /> Eliminar</button>
       </div>
 
