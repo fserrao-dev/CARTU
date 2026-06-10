@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import {
   LayoutDashboard, ClipboardList, Plus, Package, Calendar,
-  BarChart2, Users, Menu, X, LogOut, TrendingUp, UserCog, Moon, Sun
+  BarChart2, Users, Menu, X, LogOut, TrendingUp, UserCog, Moon, Sun, Calculator
 } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { cn } from '@/lib/utils'
@@ -17,6 +17,7 @@ const NAV = [
   { href: '/agenda',          label: 'Agenda',           icon: Calendar        },
   { href: '/stock',           label: 'Stock',            icon: Package         },
   { href: '/finanzas',        label: 'Finanzas',         icon: TrendingUp      },
+  { href: '/costos',          label: 'Costos',           icon: Calculator      },
   { href: '/empleados',       label: 'Empleados',        icon: UserCog         },
   { href: '/clientes',        label: 'Contactos',        icon: Users           },
   { href: '/reportes',        label: 'Reportes',         icon: BarChart2       },

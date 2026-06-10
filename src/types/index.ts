@@ -256,3 +256,42 @@ export interface Empleado {
   legajo?: string
   notas?: string
 }
+
+// ── COSTOS POR SERVICIO ──────────────────────────────────────────────────────
+export interface CostoServicio {
+  id: string
+  created_at?: string
+  // Identificación
+  nro_servicio?: string
+  nro_mes?: number
+  fecha: string
+  fallecido?: string          // nombre libre para histórico
+  tipo?: string               // campo TIPO del Excel
+  servicio_id?: string        // FK a servicios si existe
+  // Costos
+  costo_ataud?: number
+  costo_comedor?: number
+  costo_azafata?: number
+  costo_cafeteria?: number
+  costo_tanatopraxia?: number
+  costo_ambulancia?: number
+  costo_mat_calle?: number
+  costo_sellado?: number
+  costo_soldado?: number
+  costo_labor?: number
+  costo_sueldos?: number
+  costo_mortaja?: number
+  costo_urna?: number
+  costo_cementerio?: number
+  costo_administrativo?: number
+  iva_ganado?: number
+  propina?: number
+  // Totales
+  costo_total?: number
+  nro_facturacion?: string
+  facturacion?: number
+  valor_servicio?: number
+  margen?: number
+  margen_pct?: number
+  notas?: string
+}

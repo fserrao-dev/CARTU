@@ -264,3 +264,50 @@ export async function deleteEmpleado(id: string): Promise<void> {
   const { error } = await supabase.from('empleados').delete().eq('id', id)
   if (error) throw error
 }
+
+// ── COSTOS POR SERVICIO ──────────────────────────────────────────────────────
+export async function getCostos(limit = 200, offset = 0): Promise<import('@/types').CostoServicio[]> {
+  const { data, error } = await supabase
+    .from('costos_servicio')
+    .select('*')
+    .order('fecha', { ascending: false })
+    .range(offset, offset + limit - 1)
+  if (error) throw error
+  return data ?? []
+}
+
+export async function getCostosCount(): Promise<number> {
+  const { count, error } = await supabase
+    .from('costos_servicio')
+    .select('*', { count: 'exact', head: true })
+  if (error) throw error
+  return count ?? 0
+}
+
+export async function createCosto(c: Omit<import('@/types').CostoServicio, 'id' | 'created_at'>): Promise<import('@/types').CostoServicio> {
+  const { data, error } = await supabase.from('costos_servicio').insert(c).select().single()
+  if (error) throw error
+  return data
+}
+
+export async function updateCosto(id: string, c: Partial<import('@/types').CostoServicio>): Promise<void> {
+  const { error } = await supabase.from('costos_servicio').update(c).eq('id', id)
+  if (error) throw error
+}
+
+export async function deleteCosto(id: string): Promise<void> {
+  const { error } = await supabase.from('costos_servicio').delete().eq('id', id)
+  if (error) throw error
+}
+
+export async function bulkInsertCostos(rows: Omit<import('@/types').CostoServicio, 'id' | 'created_at'>[]): Promise<number> {
+  // Insert in batches of 500
+  let inserted = 0
+  for (let i = 0; i < rows.length; i += 500) {
+    const batch = rows.slice(i, i + 500)
+    const { error } = await supabase.from('costos_servicio').insert(batch)
+    if (error) throw error
+    inserted += batch.length
+  }
+  return inserted
+}
