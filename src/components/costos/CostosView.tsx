@@ -441,7 +441,7 @@ export default function CostosView({ initialCostos, totalCount }: { initialCosto
                 <td className="py-2 px-2" style={{color:'var(--text3)'}}>{c.tipo || '—'}</td>
                 {CAMPOS_COSTO.map(({ key }) => (
                   <td key={key} className="py-2 px-2 text-right" style={{color:'var(--text3)'}}>
-                    {(c as Record<string, unknown>)[key] ? fmtMoneyShort((c as Record<string, number>)[key]) : '—'}
+                    {(c as unknown as Record<string, number>)[key] ? fmtMoneyShort((c as unknown as Record<string, number>)[key]) : '—'}
                   </td>
                 ))}
                 <td className="py-2 px-2 text-right font-semibold">{fmtMoneyShort(c.costo_total)}</td>
@@ -474,7 +474,7 @@ export default function CostosView({ initialCostos, totalCount }: { initialCosto
                 <td colSpan={5} className="py-2 px-2 text-right text-xs uppercase tracking-wider" style={{color:'var(--text3)'}}>Totales ({filtered.length} registros)</td>
                 {CAMPOS_COSTO.map(({ key }) => (
                   <td key={key} className="py-2 px-2 text-right text-xs">
-                    {fmtMoneyShort(filtered.reduce((a, c) => a + ((c as Record<string, number>)[key] || 0), 0))}
+                    {fmtMoneyShort(filtered.reduce((a, c) => a + ((c as unknown as Record<string, number>)[key] || 0), 0))}
                   </td>
                 ))}
                 <td className="py-2 px-2 text-right">{fmtMoneyShort(filtered.reduce((a,c) => a+(c.costo_total??0),0))}</td>
